@@ -1,0 +1,61 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Only allow one deploy at a time
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Only deploy after CI passes
+    needs: []
+    if: github.ref == 'refs/heads/main'
+
+    permissions:
+      id-token: write   # For OIDC authentication
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements-dev.txt
+          pip install -r infra/requirements.txt
+
+      - name: Install AWS CDK
+        run: npm install -g aws-cdk
+
+      # CUSTOMIZE: Configure AWS credentials
+      # Option 1: OIDC (recommended for production)
+      # - uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     role-to-assume: arn:aws:iam::YOUR_ACCOUNT_ID:role/YOUR_DEPLOY_ROLE
+      #     aws-region: YOUR_AWS_REGION
+
+      # Option 2: Access keys (simpler, add to GitHub Secrets)
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: CDK Synthesize
+        run: cd infra && cdk synth
+
+      - name: CDK Diff
+        run: cd infra && cdk diff || true
+
+      - name: CDK Deploy
+        run: cd infra && cdk deploy --require-approval never

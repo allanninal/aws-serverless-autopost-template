@@ -1,0 +1,26 @@
+[project]
+name = "aws-serverless-autopost-template"
+version = "1.0.0"
+description = "Production-ready serverless template for automated Facebook image posting on AWS"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Allan Ninal"}]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["lambda"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["lambda"]
+markers = [
+    "unit: Unit tests (no external dependencies)",
+    "integration: Integration tests (require AWS mocks)",
+]
