@@ -5,6 +5,7 @@
 ![Facebook API](https://img.shields.io/badge/Facebook_Graph_API-v23.0-1877F2?logo=facebook&logoColor=white)
 ![Tests](https://img.shields.io/badge/Tests-pytest-0A9EDC?logo=pytest&logoColor=white)
 ![IaC](https://img.shields.io/badge/IaC-AWS_CDK-FF9900)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20this%20project-F16061?logo=ko-fi&logoColor=white)](https://ko-fi.com/allanninal)
 
 # AWS Serverless Autopost Template
 
@@ -479,6 +480,16 @@ Contributions welcome. Please open an issue first to discuss changes.
 
 ---
 
+## Support
+
+If this template saves you time or money, consider supporting the project:
+
+[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/allanninal)
+
+Your support helps cover API testing costs, keep the template updated with Facebook API changes, and fund new features like Instagram cross-posting and analytics dashboards.
+
+---
+
 ## License
 
 MIT — use it however you want. See [LICENSE](LICENSE).
@@ -490,3 +501,5 @@ MIT — use it however you want. See [LICENSE](LICENSE).
 **Allan Ninal** — AWS & DevOps Engineer | Automation Specialist
 
 Building production serverless systems that run themselves.
+
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Buy%20me%20a%20coffee-F16061?logo=ko-fi&logoColor=white)](https://ko-fi.com/allanninal)
